@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Dog Sitter Finder</string>
+
+
+    <string name="map_api_key">AIzaSyDVJKmGd15heeuT9jSfKRtke4VqfRnjAxY</string>
+
+
+    <string name="add_title">Add your dog sitter service</string>
+    <string name="title_hint">Title</string>
+    <string name="description_hint">Description</string>
+    <string name="address_hint">Address</string>
+    <string name="phone_hint">Phone No</string>
+    <string name="email_hint">Email</string>
+    <string name="starting_price_hint">Starting price</string>
+    <string name="maximum_price_hint">Maximum price</string>
+
+
+    <string name="add_new_btn">ADD NEW DOG SITTER SERVICE</string>
+    <string name="see_map_btn">SEE DOG SITTERS SERVICES (MAP)</string>
+    <string name="see_list_btn">SEE DOG SITTERS SERVICES (LIST)</string>
+
+
+    <string name="users_collection">dog_sitters_users</string>
+    <string name="data_collection">dog_sitters_services</string>
+
+
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+
+
+    <string name="detail_page_title">User and Service Detail page</string>
+</resources>

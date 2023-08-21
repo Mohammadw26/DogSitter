@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/empty_tall_divider_8dp"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:showDividers="middle"
+    tools:context=".AddNewDogActivity">
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="ADD DOG"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="DETAILS" />
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dog name"
+            android:textSize="12sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_details_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:hint="Any details"
+            android:inputType="textMultiLine"
+            android:lines="3"
+            android:textSize="12sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:id="@+id/divider13"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="REMINDERS" />
+
+    <TextView
+        android:id="@+id/add_reminders_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No reminder added yet" />
+
+    <Button
+        android:id="@+id/add_addreminder_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="SET NEW REMINDER"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/add_savedog_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SAVE DOG"
+        android:textSize="12sp" />
+
+</LinearLayout>

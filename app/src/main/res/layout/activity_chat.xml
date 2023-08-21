@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ChatActivity">
+
+    <ListView
+        android:id="@+id/lv_msgs_chat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:divider="@null"
+        app:layout_constraintBottom_toTopOf="@+id/et_msg_chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_msg_chat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:gravity="start"
+        android:hint="write your message here"
+        android:inputType="textMultiLine"
+        android:lines="1"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_send_chat"
+        app:layout_constraintStart_toEndOf="@+id/iv_camera_chat" />
+
+    <ImageView
+        android:id="@+id/iv_send_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/et_msg_chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_msg_chat"
+        app:srcCompat="@drawable/ic_send" />
+
+    <ImageView
+        android:id="@+id/iv_camera_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/et_msg_chat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_msg_chat"
+        app:srcCompat="@drawable/ic_camera" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,11 @@
 
     <string name="users_collection">dog_sitters_users</string>
     <string name="data_collection">dog_sitters_services</string>
+    <string name="requests_collection">dog_sitters_requests</string>
+    <string name="mydogs_collection">dog_sitters_mydogs</string>
+
+    <string name="messages_realtime">dog_sitters_messages</string>
+    <string name="images_storage">dog_sitters_images</string>
 
 
     <string name="start_date">Start Date</string>
@@ -31,4 +36,7 @@
 
 
     <string name="detail_page_title">User and Service Detail page</string>
+    <string name="title_activity_answers">AnswersActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

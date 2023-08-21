@@ -95,6 +95,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        Utils.showToast(MapActivity.this, e.getLocalizedMessage());
                         Utils.dismissProgressDialog();
                         currentLatLng = new LatLng(48.858834, 2.340167);
                         mapFragment = (SupportMapFragment) getSupportFragmentManager()

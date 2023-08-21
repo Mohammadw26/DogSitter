@@ -41,3 +41,7 @@ White box testing involved examining the codebase for any potential vulnerabilit
 
 Challenges Faced: Testing and bug resolution required meticulous attention to detail, with a focus on uncovering and addressing edge cases and potential vulnerabilities.
 
+Weeks 13 & 14: (12 hours)
+In the recent update, I focused on enhancing the application's user interface (UI) to provide a more intuitive and visually appealing experience for users. This involved refining the layout, color schemes, typography, and overall design elements to ensure a consistent and modern look.
+Additionally, I performed a code refactoring to improve the maintainability and readability of the codebase. This involved restructuring the code while maintaining its functionality. I also introduced additional categories to the application, broadening its scope and providing users with a wider range of options and content to explore.
+These changes collectively contribute to an improved user experience and a more organized and scalable codebase for future development.

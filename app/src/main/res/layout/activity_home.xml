@@ -7,6 +7,76 @@
     android:padding="16dp"
     tools:context=".HomeActivity">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_requests_home"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/theme_color"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toStartOf="@+id/cv_mychats_home"
+        app:layout_constraintStart_toEndOf="@+id/cv_myrequests_home"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="Requests"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_mychats_home"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/theme_color"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="Chats"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_myrequests_home"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/theme_color"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="My Requests"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+    </androidx.cardview.widget.CardView>
+
     <Button
         android:id="@+id/home_btn_exit"
         android:layout_width="wrap_content"
@@ -23,6 +93,16 @@
         android:layout_height="wrap_content"
         android:text="@string/see_list_btn"
         android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/home_btn_mydogs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/home_btn_chatbot"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Chat with chatbot"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/home_btn_exit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,6 +114,16 @@
         android:text="@string/see_map_btn"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/home_btn_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/home_btn_mydogs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="MY DOGS"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/home_btn_chatbot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -51,11 +141,12 @@
         android:id="@+id/imageView5"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/home_btn_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_mychats_home"
         app:srcCompat="@drawable/app_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

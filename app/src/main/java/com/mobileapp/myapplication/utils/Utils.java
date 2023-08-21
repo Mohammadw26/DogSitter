@@ -15,12 +15,15 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+
+import com.mobileapp.myapplication.services.NotificationScheduler;
 
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
@@ -40,6 +43,34 @@ public final class Utils {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setProgress(0);
         progressDialog.show();
+    }
+
+    public static boolean isValidEmail(String email){
+        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
+
+    public static void scheduleNotification(Context context, String msg, String date, String time) {
+        String[] dateSplit = date.split("/");
+        String[] timeSplit = time.split(":");
+        // Set the desired date and time for the notification
+        int year = Integer.parseInt(dateSplit[2]);
+        int month = (Integer.parseInt(dateSplit[1])-1);
+        int day = Integer.parseInt(dateSplit[0]);
+
+        int hours = Integer.parseInt(timeSplit[0]);
+        int minutes = Integer.parseInt(timeSplit[1]);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month );
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.HOUR_OF_DAY, hours);
+        calendar.set(Calendar.MINUTE, minutes);
+        calendar.set(Calendar.SECOND, 01);
+
+        long notificationTimeInMillis = calendar.getTimeInMillis();
+
+        NotificationScheduler.scheduleNotification(context, notificationTimeInMillis, msg);
     }
 
     public static String getCompleteAddressString(Context context, double LATITUDE, double LONGITUDE) {

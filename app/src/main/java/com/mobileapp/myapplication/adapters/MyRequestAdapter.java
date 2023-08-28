@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -51,11 +52,16 @@ public class MyRequestAdapter extends ArrayAdapter<Request> {
         CardView declineCv = convertView.findViewById(R.id.item_requests_decline_cv);
         LinearLayout btnsLl = convertView.findViewById(R.id.item_requests_ll_buttons);
         RatingBar ratingsRb = convertView.findViewById(R.id.item_requests_rating_rb);
+        CardView setReminderBtn = convertView.findViewById(R.id.item_requests_addreminder_cv);
 
+        setReminderBtn.setVisibility(View.GONE);
 
         datesTv.setText("From " + request.fromDate + "\nTo " + request.toDate);
         statusTv.setText(request.status);
-        detailsTv.setText(request.details);
+        String detailText = request.details;
+        if(request.allRequests!="")
+            detailText+="\n\nAll requests\n" + request.allRequests;
+        detailsTv.setText(detailText);
         btnsLl.setVisibility(View.VISIBLE);
 
 

@@ -1,10 +1,15 @@
 package com.mobileapp.myapplication.models;
 
-public class Request {
-    public String requesterId, ownerId, serviceId, fromDate, toDate, details, status, requestId, vaccinationName, vaccinationTime, foodName, foodTime;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Request(String requestId, String requesterId, String ownerId, String serviceId, String fromDate, String toDate, String details, String status,
-                   String vaccinationName,String  vaccinationTime,String  foodName,String  foodTime) {
+public class Request {
+    public String requesterName, requesterId, ownerId, serviceId, fromDate, toDate, details, status, requestId, allRequests;
+
+    public List<String> reminders = new ArrayList<>();
+    public Request(String requesterName, String requestId, String requesterId, String ownerId, String serviceId, String fromDate, String toDate, String details, String status,
+                   String allRequests, List<String> reminders) {
+        this.requesterName = requesterName;
         this.requestId = requestId;
         this.requesterId = requesterId;
         this.ownerId = ownerId;
@@ -13,10 +18,8 @@ public class Request {
         this.toDate = toDate;
         this.details = details;
         this.status = status;
-        this.vaccinationName = vaccinationName;
-        this.vaccinationTime = vaccinationTime;
-        this.foodName = foodName;
-        this.foodTime = foodTime;
+        this.allRequests = allRequests;
+        this.reminders = reminders;
     }
 
     public Request() {
@@ -24,16 +27,12 @@ public class Request {
 
     public String getDetailInfo(){
         String detailsString = "";
-        if(vaccinationName!="")
-            detailsString+="\nVaccination Name: " + vaccinationName;
-        if(vaccinationTime!="")
-            detailsString+="\nVaccination Time: " + vaccinationTime;
-        if(foodName!="")
-            detailsString+="\n\nFood Name: " + foodName;
-        if(foodTime!="")
-            detailsString+="\nFood Time: " + foodTime;
+        if(requesterName!="")
+            detailsString+="Requester Name: " + requesterName;
         if(details!="")
             detailsString+="\n\nDetails: " + details;
+        if(allRequests!="")
+            detailsString+="\n\nAll Requests\n" + allRequests;
         return detailsString;
     }
 }

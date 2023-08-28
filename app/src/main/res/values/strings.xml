@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Dog Sitter Finder</string>
+    <string name="app_name">Sitters</string>
 
 
     <string name="map_api_key">AIzaSyDVJKmGd15heeuT9jSfKRtke4VqfRnjAxY</string>
 
 
-    <string name="add_title">Add your dog sitter service</string>
+    <string name="add_title">Add your service</string>
     <string name="title_hint">Title</string>
     <string name="description_hint">Description</string>
     <string name="address_hint">Address</string>
@@ -15,18 +15,19 @@
     <string name="maximum_price_hint">Maximum price</string>
 
 
-    <string name="add_new_btn">ADD NEW DOG SITTER SERVICE</string>
-    <string name="see_map_btn">SEE DOG SITTERS SERVICES (MAP)</string>
-    <string name="see_list_btn">SEE DOG SITTERS SERVICES (LIST)</string>
+    <string name="add_new_btn">ADD NEW SERVICE</string>
+    <string name="see_map_btn">SEE SERVICES (MAP)</string>
+    <string name="see_list_btn">SEE SERVICES (LIST)</string>
 
 
-    <string name="users_collection">dog_sitters_users</string>
-    <string name="data_collection">dog_sitters_services</string>
-    <string name="requests_collection">dog_sitters_requests</string>
-    <string name="mydogs_collection">dog_sitters_mydogs</string>
+    <string name="users_collection">sitters_users</string>
+    <string name="data_collection">sitters_services</string>
+    <string name="requests_collection">sitters_requests</string>
+    <string name="myreminderss_collection">sitters_myreminders</string>
+    <string name="allreminderss_collection">sitters_allreminders</string>
 
-    <string name="messages_realtime">dog_sitters_messages</string>
-    <string name="images_storage">dog_sitters_images</string>
+    <string name="messages_realtime">sitters_messages</string>
+    <string name="images_storage">sitters_images</string>
 
 
     <string name="start_date">Start Date</string>
@@ -39,4 +40,12 @@
     <string name="title_activity_answers">AnswersActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string-array name="request_types">
+        <item>Food</item>
+        <item>Vaccines</item>
+        <item>Washing</item>
+        <item>Day stroll</item>
+        <item>Other</item>
+    </string-array>
 </resources>

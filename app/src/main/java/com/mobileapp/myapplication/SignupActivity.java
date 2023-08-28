@@ -47,6 +47,13 @@ public class SignupActivity extends AppCompatActivity {
 
         signupBtn = findViewById(R.id.signup_btn_signup);
 
+        findViewById(R.id.signup_btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +87,9 @@ public class SignupActivity extends AppCompatActivity {
                                         user.put("username", usernameEt.getText().toString());
                                         user.put("password", passwordEt.getText().toString());
                                         user.put("email", emailEt.getText().toString());
+                                        user.put("request_noti", false);
+                                        user.put("myrequest_noti", false);
+                                        user.put("chat_noti", false);
                                         user.put("rating", 0);
                                         user.put("ratingCounts", 0);
 

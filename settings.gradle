@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 
     }
 }
-rootProject.name = "Dog Sitter Finder"
+rootProject.name = "Sitter Finder"
 include ':app'

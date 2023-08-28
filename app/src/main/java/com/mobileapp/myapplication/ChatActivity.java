@@ -13,18 +13,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mobileapp.myapplication.adapters.MessagesAdapter;
 import com.mobileapp.myapplication.databinding.ActivityChatBinding;
 import com.mobileapp.myapplication.models.Message;
+import com.mobileapp.myapplication.models.UserModel;
 import com.mobileapp.myapplication.utils.Utils;
 
 import org.jetbrains.annotations.NotNull;
@@ -83,6 +88,22 @@ public class ChatActivity extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference(getResources().getString(R.string.messages_realtime)).child(getIntent().getStringExtra("guest_id"))
                             .child(getIntent().getStringExtra("user_id")).push().setValue(message);
                     binding.etMsgChat.setText("");
+
+                    FirebaseFirestore.getInstance().collection(getResources().getString(R.string.users_collection))
+                            .document(getIntent().getStringExtra("guest_id")).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isSuccessful()){
+                                        Utils.dismissProgressDialog();
+                                        UserModel userModel = task.getResult().toObject(UserModel.class);
+                                        userModel.chat_noti = true;
+                                        FirebaseFirestore.getInstance().collection(getResources().getString(R.string.users_collection))
+                                                .document(getIntent().getStringExtra("guest_id")).set(userModel);
+
+                                    }
+                                }
+                            });
+
                 }
             }
         });

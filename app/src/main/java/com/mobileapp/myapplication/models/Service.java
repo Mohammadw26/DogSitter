@@ -1,9 +1,11 @@
 package com.mobileapp.myapplication.models;
 
+import java.util.List;
+
 public class Service {
     public String title, description, address, contact, startingPrice, endingPrice, latLng, startTime, endTime, startDate, endDate, serviceId, userId;
-
-    public Service(String title, String description, String address, String contact, String startingPrice, String endingPrice, String latLng, String startTime, String endTime, String startDate, String endDate, String serviceId, String userId) {
+    public List<String> categoriesList;
+    public Service(String title, String description, String address, String contact, String startingPrice, String endingPrice, String latLng, String startTime, String endTime, String startDate, String endDate, String serviceId, String userId, List<String> categoriesList) {
         this.title = title;
         this.description = description;
         this.address = address;
@@ -17,6 +19,7 @@ public class Service {
         this.endDate = endDate;
         this.serviceId = serviceId;
         this.userId = userId;
+        this.categoriesList = categoriesList;
     }
 
     public Service() {
@@ -26,6 +29,14 @@ public class Service {
         return "Title: " + title
                 +"\nDescription: " + description
                 +"\nAddress: " + address;
+    }
+
+    public String getCategoriesInfo(){
+        String categories = "";
+        for (String category: categoriesList) {
+            categories+="\n"+category;
+        }
+        return categories;
     }
     public String getContactInfo(){
         return "Phone no: " + contact;

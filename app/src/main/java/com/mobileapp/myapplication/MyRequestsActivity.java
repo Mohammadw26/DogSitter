@@ -3,6 +3,7 @@ package com.mobileapp.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RadioGroup;
 
@@ -20,7 +21,9 @@ import com.mobileapp.myapplication.models.RequestStatus;
 import com.mobileapp.myapplication.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyRequestsActivity extends AppCompatActivity {
 
@@ -37,6 +40,11 @@ public class MyRequestsActivity extends AppCompatActivity {
 
         binding = ActivityMyRequestsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Map<String, Object> update = new HashMap<>();
+        update.put("myrequest_noti", false);
+        FirebaseFirestore.getInstance().collection(getResources().getString(R.string.users_collection))
+                .document(Utils.getPref(MyRequestsActivity.this, "user_id", "")).update(update);
 
         binding.rgStatusMyrequests.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -96,5 +104,13 @@ public class MyRequestsActivity extends AppCompatActivity {
             requestAdapter = new MyRequestAdapter(MyRequestsActivity.this, (ArrayList<Request>) completedRequestsList);
 
         binding.lvRequestsMyrequests.setAdapter(requestAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        MyRequestsActivity.this.finish();
     }
 }

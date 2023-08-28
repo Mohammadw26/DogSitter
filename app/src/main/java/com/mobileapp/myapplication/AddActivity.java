@@ -9,6 +9,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,6 +37,7 @@ import com.mobileapp.myapplication.models.Service;
 import com.mobileapp.myapplication.utils.Utils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +58,7 @@ public class AddActivity extends AppCompatActivity  implements OnMapReadyCallbac
 
 
     private EditText titleEt, desEt, addressEt, startingPriceEt, maximumPriceEt, contactEt, startTimeEt, endTimeEt, startDateEt, endDateEt;
+    private CheckBox dogCb, catCb, birdCb, babiesCb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,12 @@ public class AddActivity extends AppCompatActivity  implements OnMapReadyCallbac
         startDateEt = findViewById(R.id.add_et_startdate);
         endDateEt = findViewById(R.id.add_et_enddate);
 
+        dogCb = findViewById(R.id.add_cb_dogs);
+        catCb = findViewById(R.id.add_cb_cats);
+        birdCb = findViewById(R.id.add_cb_birds);
+        babiesCb = findViewById(R.id.add_cb_babies);
+
+
 
 
         setDateAndTimePickers();
@@ -85,17 +94,32 @@ public class AddActivity extends AppCompatActivity  implements OnMapReadyCallbac
         findViewById(R.id.add_btn_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Utils.isEmpty(titleEt) || Utils.isEmpty(desEt) || Utils.isEmpty(addressEt)
+                if(!dogCb.isChecked() && !catCb.isChecked() && !birdCb.isChecked() && !babiesCb.isChecked()){
+                    Utils.showToast(AddActivity.this, "Select each category at least");
+                }else if(Utils.isEmpty(titleEt) || Utils.isEmpty(desEt) || Utils.isEmpty(addressEt)
                 || Utils.isEmpty(startingPriceEt) || Utils.isEmpty(contactEt)  || Utils.isEmpty(maximumPriceEt)
                         || Utils.isEmpty(startTimeEt) || Utils.isEmpty(endTimeEt)  || Utils.isEmpty(startDateEt)  || Utils.isEmpty(endDateEt)){
                     Utils.showToast(AddActivity.this, "Some fields are still empty");
                 }else{
                     Utils.showProgressDialog(AddActivity.this, "Adding new service\nPlease wait");
 
+                    List<String> categories = new ArrayList<>();
+                    if(dogCb.isChecked()){
+                        categories.add("Dogs");
+                    }
+                    if(catCb.isChecked()){
+                        categories.add("Cats");
+                    }
+                    if(birdCb.isChecked()){
+                        categories.add("Birds");
+                    }
+                    if(babiesCb.isChecked()){
+                        categories.add("Babies");
+                    }
                     Service service = new Service(titleEt.getText().toString(), desEt.getText().toString(), addressEt.getText().toString(),
                             contactEt.getText().toString(), startingPriceEt.getText().toString(), maximumPriceEt.getText().toString(), midLatLng.latitude+"," + midLatLng.longitude,
                             startTimeEt.getText().toString(), endTimeEt.getText().toString(), startDateEt.getText().toString(), endDateEt.getText().toString(), null,
-                            Utils.getPref(AddActivity.this, "user_id", null));
+                            Utils.getPref(AddActivity.this, "user_id", null), categories);
 
                     FirebaseFirestore.getInstance().collection(getResources().getString(R.string.data_collection)).add(service)
                             .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

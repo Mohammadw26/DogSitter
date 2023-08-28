@@ -24,13 +24,17 @@ import androidx.cardview.widget.CardView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.mobileapp.myapplication.AddNewDogActivity;
+import com.mobileapp.myapplication.AddNewReminderActivity;
 import com.mobileapp.myapplication.DetailActivity;
 import com.mobileapp.myapplication.R;
 import com.mobileapp.myapplication.models.Message;
+import com.mobileapp.myapplication.models.MyReminder;
 import com.mobileapp.myapplication.models.Request;
 import com.mobileapp.myapplication.models.RequestStatus;
+import com.mobileapp.myapplication.models.UserModel;
 import com.mobileapp.myapplication.utils.Utils;
 
 import java.util.ArrayList;
@@ -68,7 +72,28 @@ public class RequestAdapter extends ArrayAdapter<Request> {
         setReminderCv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showReminderDialog( request);
+                if(request.reminders!=null){
+                    if(request.reminders.size()>0){
+                        for (String reminder: request.reminders) {
+                            String[] reminderSplit = reminder.split("##");
+                            Utils.scheduleNotification(getContext(), reminderSplit[0], reminderSplit[1], reminderSplit[2]);
+                            Utils.showToast(getContext(), "Reminder set for " + reminder.replace("$$", " "));
+                            MyReminder myReminder = new MyReminder(Utils.getPref(getContext(), "user_id", ""), reminderSplit[0]
+                                    +"\nDetails: " + request.getDetailInfo(), "Date: " + reminderSplit[1] + "  Time: " + reminderSplit[2],
+                                    "", new ArrayList<>());
+
+                            FirebaseFirestore.getInstance().collection(getContext().getResources().getString(R.string.allreminderss_collection)).add(myReminder);
+                        }
+                        Utils.showToast(getContext(), "All reminder set successfully");
+
+                    }else{
+                        Utils.showToast(getContext(), "No reminder added by client");
+
+                    }
+                }else{
+                    Utils.showToast(getContext(), "No reminder added by client");
+                }
+//                showReminderDialog( request);
             }
         });
 
@@ -91,14 +116,14 @@ public class RequestAdapter extends ArrayAdapter<Request> {
             approveCv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateStatus(request.requestId, RequestStatus.ACCEPTED.toString());
+                    updateStatus(request.requestId, RequestStatus.ACCEPTED.toString(), request.requesterId);
                 }
             });
 
             declineCv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateStatus(request.requestId, RequestStatus.DECLINED.toString());
+                    updateStatus(request.requestId, RequestStatus.DECLINED.toString(), request.requesterId);
                 }
             });
 
@@ -112,7 +137,7 @@ public class RequestAdapter extends ArrayAdapter<Request> {
     }
 
 
-    private void updateStatus(String requestId, String updatedStatus){
+    private void updateStatus(String requestId, String updatedStatus, String requesterId){
         Map<String, Object> update = new HashMap<>();
         update.put("status", updatedStatus);
         Utils.showProgressDialog(getContext(), "Updating status\nPlease wait");
@@ -120,11 +145,29 @@ public class RequestAdapter extends ArrayAdapter<Request> {
                 .document(requestId).update(update).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Utils.dismissProgressDialog();
+
                         if(task.isSuccessful()){
-                            Utils.showToast(getContext(), "Status updated successfully");
-                            ((Activity) getContext()).onBackPressed();
+
+                            FirebaseFirestore.getInstance().collection(getContext().getResources().getString(R.string.users_collection))
+                                    .document(requesterId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if(task.isSuccessful()){
+                                                Utils.dismissProgressDialog();
+                                                UserModel userModel = task.getResult().toObject(UserModel.class);
+                                                userModel.myrequest_noti = true;
+                                                FirebaseFirestore.getInstance().collection(getContext().getResources().getString(R.string.users_collection))
+                                                        .document(requesterId).set(userModel);
+                                                Utils.showToast(getContext(), "Status updated successfully");
+                                                ((Activity) getContext()).onBackPressed();
+                                            }
+                                        }
+                                    });
+
+
+
                         }else{
+                            Utils.dismissProgressDialog();
                             Utils.showToast(getContext(), task.getException().getLocalizedMessage());
                         }
                     }
@@ -199,7 +242,10 @@ public class RequestAdapter extends ArrayAdapter<Request> {
                 else{
                     Utils.showToast(getContext(), "Reminder set successfully");
                     Utils.scheduleNotification(getContext(), messageEt.getText().toString() +"\nDetails: " + request.getDetailInfo(), dateEt.getText().toString(), timeEt.getText().toString());
-                 }
+                    MyReminder myReminder = new MyReminder(Utils.getPref(getContext(), "user_id", ""), messageEt.getText().toString() +"\nDetails: " + request.getDetailInfo(), "Date: " + dateEt.getText().toString() + "  Time: " + timeEt.getText().toString(),
+                            null, null);
+                    FirebaseFirestore.getInstance().collection(getContext().getResources().getString(R.string.allreminderss_collection)).add(myReminder);
+                }
 
 
             }

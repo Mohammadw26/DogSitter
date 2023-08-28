@@ -44,6 +44,12 @@ public class ChatsListActivity extends AppCompatActivity {
             userId = getIntent().getStringExtra("user_id");
         }
 
+        Map<String, Object> update = new HashMap<>();
+        update.put("chat_noti", false);
+        FirebaseFirestore.getInstance().collection(getResources().getString(R.string.users_collection))
+                .document(Utils.getPref(ChatsListActivity.this, "user_id", "")).update(update);
+
+
         chatsListLv = findViewById(R.id.lv_chatslist_chatlist);
 
 
@@ -142,5 +148,13 @@ public class ChatsListActivity extends AppCompatActivity {
                         .putExtra("guest_id", nameIdsMap.get(usersList.get(position))));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        ChatsListActivity.this.finish();
     }
 }

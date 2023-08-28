@@ -23,6 +23,9 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.mobileapp.myapplication.R;
+import com.mobileapp.myapplication.models.MyReminder;
 import com.mobileapp.myapplication.services.NotificationScheduler;
 
 import java.security.SecureRandom;
@@ -50,6 +53,10 @@ public final class Utils {
     }
 
     public static void scheduleNotification(Context context, String msg, String date, String time) {
+
+
+
+
         String[] dateSplit = date.split("/");
         String[] timeSplit = time.split(":");
         // Set the desired date and time for the notification

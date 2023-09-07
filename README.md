@@ -1,4 +1,4 @@
-**# DogSitter**
+**# Sitters**
 
 **Demo screen shots and features explanation can be found in (Sitter Services App features and demo.pptx)**
 
